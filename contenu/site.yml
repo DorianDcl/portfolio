@@ -8,10 +8,10 @@ numero_candidat: ""          # à remplir quand tu l'auras reçu
 
 # Adresse publique du site, à remplir une fois le site en ligne.
 # Exemple : https://ton-pseudo.github.io/portfolio/
-url_portfolio: ""
+url_portfolio: "https://doriandcl.github.io/portfolio/"
 
 # Contact. Laisse vide ("") ce que tu ne veux pas afficher.
 email: dorian.dacol@gmail.com
 ville: Tarbes et ses environs (Hautes-Pyrénées)
-github: ""                   # exemple : https://github.com/ton-pseudo
+github: "https://github.com/DorianDcl"
 linkedin: ""                 # exemple : https://www.linkedin.com/in/ton-profil
