@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block titre %}Veille technologique – {{ site.nom }}{% endblock %}
+{% block contenu %}
+<div class="cadre page">
+  <header class="page-entete">
+    <h1>Veille technologique</h1>
+    <p class="chapeau">Je suis l'actualité d'un sujet dans la durée, avec des outils qui collectent l'information pour moi, puis j'en rédige une synthèse et j'en tire ce qui compte pour mon métier.</p>
+  </header>
+  <ul class="liste-veille">
+    {% for v in veilles %}
+    <li>
+      <p class="rea-meta">{% if v.theme %}<span>{{ v.theme }}</span> {% endif %}<span>Mise à jour le {{ v.date }}</span></p>
+      <h2><a href="{{ racine }}{{ v.url }}">{{ v.titre }}</a></h2>
+      <p>{{ v.resume }}</p>
+      <p class="rea-techno">{{ v.sources | length }} source{{ 's' if v.sources | length > 1 }}{% if v.outils %} ; outils : {{ v.outils | join(', ') }}{% endif %}</p>
+    </li>
+    {% else %}
+    <li class="vide">La première synthèse de veille arrive bientôt.</li>
+    {% endfor %}
+  </ul>
+</div>
+{% endblock %}

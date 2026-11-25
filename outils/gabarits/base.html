@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+{% if objectif %}
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <link rel="stylesheet" href="{{ racine }}style/objectif.css">
+{% endif %}
+  <title>{% if objectif %}[FICTIF] {% endif %}{% block titre %}{{ site.nom }}{% endblock %} – Portfolio BTS SIO SLAM</title>
+  <meta name="description" content="{% block description %}Portfolio de {{ site.nom }}, {{ site.titre }} : parcours, réalisations professionnelles, compétences et veille technologique.{% endblock %}">
+  <meta property="og:title" content="{{ site.nom }} – Portfolio BTS SIO SLAM">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="fr_FR">
+  <link rel="icon" href="{{ racine }}style/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="{{ racine }}style/polices/ahn-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="{{ racine }}style/site.css">
+</head>
+<body>
+{% if objectif %}
+  <div class="bandeau-objectif" role="note"><strong>{{ bandeau }}</strong> <span>Modèle de travail personnel. <span class="etat etat-fait">Fait</span> = réel aujourd'hui. <span class="etat etat-afaire">À réaliser</span> = pas encore fait, chiffres donnés en exemple.</span></div>
+{% endif %}
+  <a class="evitement" href="#contenu">Aller au contenu</a>
+  <header class="entete">
+    <div class="cadre entete-interieur">
+      <a class="marque" href="{{ racine }}">
+        <span class="marque-nom">{{ site.nom }}</span>
+        <span class="marque-titre">BTS SIO SLAM, session {{ site.session }}</span>
+      </a>
+      <nav aria-label="Navigation principale">
+        <ul class="menu">
+          {% for cle, libelle, lien in [
+            ('accueil', 'Accueil', ''), ('bts-sio', 'BTS SIO', 'bts-sio/'), ('cv', 'CV', 'cv/'),
+            ('parcours', 'Parcours', 'parcours/'), ('realisations', 'Réalisations', 'realisations/'),
+            ('competences', 'Compétences', 'competences/'), ('veille', 'Veille', 'veille/'),
+            ('contact', 'Contact', 'contact/')] %}
+          <li><a href="{{ racine }}{{ lien }}"{% if actif == cle %} aria-current="page"{% endif %}>{{ libelle }}</a></li>
+          {% endfor %}
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="contenu">
+    {% block contenu %}{% endblock %}
+  </main>
+
+  <footer class="pied">
+    <div class="cadre pied-interieur">
+      <p>{{ site.nom }}. {{ site.titre }}, {{ site.centre }}.</p>
+{% if objectif %}
+      <p><strong>{{ bandeau }}</strong></p>
+{% endif %}
+      <p>Site sans cookie ni traceur. Dernière mise à jour le {{ mise_a_jour }}.</p>
+    </div>
+  </footer>
+  <script src="{{ racine }}style/site.js" defer></script>
+</body>
+</html>

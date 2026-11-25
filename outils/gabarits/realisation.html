@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% from "_macros.html" import etiquette_periode, documents %}
+{% block titre %}{{ r.titre }} – {{ site.nom }}{% endblock %}
+{% block description %}{{ r.resume or r.titre }}{% endblock %}
+{% block contenu %}
+<article class="cadre page">
+  <p class="fil"><a href="{{ racine }}realisations/">Réalisations</a></p>
+  <header class="page-entete">
+    <p class="rea-meta">{{ etiquette_periode(r) }} <span>{{ r.dates }}</span>{% if r.e6 %} <span class="e6">Support de l'épreuve E6</span>{% endif %}</p>
+    <h1>{{ r.titre }}</h1>
+    {% if r.resume %}<p class="chapeau">{{ r.resume }}</p>{% endif %}
+  </header>
+
+  <div class="fiche">
+    <div class="prose">{{ r.html | safe }}</div>
+
+    <aside class="fiche-marge" aria-label="Fiche de la réalisation">
+      <dl>
+        {% if r.organisation %}<dt>Organisation</dt><dd>{{ r.organisation }}</dd>{% endif %}
+        <dt>Cadre</dt><dd>{{ r.periode_nom }}</dd>
+        <dt>Dates</dt><dd>{{ r.dates | capitalize }}</dd>
+        {% if r.technologies %}<dt>Technologies</dt><dd>{{ r.technologies | join(', ') }}</dd>{% endif %}
+        <dt>Compétences du bloc 1</dt>
+        <dd>
+          {% if r.competences %}
+          <ul>{% for c in r.competences %}<li><a href="{{ racine }}competences/#{{ c }}">{{ par_id[c].intitule }}</a></li>{% endfor %}</ul>
+          {% else %}À préciser{% endif %}
+        </dd>
+        {% if r.liens %}<dt>Liens</dt><dd><ul>{% for l in r.liens %}<li><a href="{{ l.url }}" rel="noopener">{{ l.texte }}</a></li>{% endfor %}</ul></dd>{% endif %}
+      </dl>
+    </aside>
+  </div>
+
+  {% if r.images %}
+  <section class="galerie-bloc" aria-labelledby="t-galerie">
+    <h2 id="t-galerie">Captures d'écran</h2>
+    <ul class="galerie">
+      {% for i in r.images %}
+      <li><figure>
+        <a href="{{ i.grand }}" data-grand="{{ i.grand }}" data-legende="{{ i.legende }}">
+          <img src="{{ i.mini }}" alt="{{ i.legende }}" width="{{ i.mini_largeur }}" height="{{ i.mini_hauteur }}" loading="lazy">
+        </a>
+        <figcaption>{{ i.legende }}</figcaption>
+      </figure></li>
+      {% endfor %}
+    </ul>
+  </section>
+  {% endif %}
+
+  {% if r.documents %}
+  <section aria-labelledby="t-docs">
+    <h2 id="t-docs">Documents à télécharger</h2>
+    {{ documents(r.documents, '') }}
+  </section>
+  {% endif %}
+
+  <p class="retour"><a href="{{ racine }}realisations/">Retour à la liste des réalisations</a></p>
+</article>
+
+<dialog class="visionneuse" id="visionneuse" aria-label="Image agrandie">
+  <form method="dialog"><button class="bouton bouton-clair" autofocus>Fermer</button></form>
+  <img src="" alt="">
+  <p></p>
+</dialog>
+{% endblock %}

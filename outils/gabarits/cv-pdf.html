@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><title>CV – {{ site.nom }}</title>
+<style>
+@font-face { font-family: "AHN"; src: url("polices/ahn-normal.woff2") format("woff2"); font-weight: 200 800; }
+@page { size: A4; margin: 16mm 15mm; }
+* { box-sizing: border-box; }
+body { font-family: "AHN", Arial, sans-serif; font-size: 10pt; line-height: 1.45; color: #16202c; margin: 0; }
+h1 { font-size: 25pt; margin: 0; letter-spacing: -0.02em; line-height: 1.1; }
+.sous { font-size: 12pt; color: #1b4b8f; margin: 2pt 0 0; font-weight: 600; }
+.contact { margin: 7pt 0 0; color: #4e5a69; }
+header { border-bottom: 2pt solid #16202c; padding-bottom: 10pt; margin-bottom: 12pt; }
+.grille { display: flex; gap: 9mm; }
+.principal { flex: 1; }
+.marge { width: 47mm; }
+h2 { font-size: 11pt; margin: 13pt 0 6pt; padding-bottom: 2.5pt; border-bottom: 0.6pt solid #b9c3cf; color: #1b4b8f; }
+h2:first-child { margin-top: 0; }
+.item { display: flex; gap: 5mm; margin-bottom: 7pt; break-inside: avoid; }
+.date { width: 21mm; flex: none; color: #4e5a69; margin: 0; }
+h3 { font-size: 10pt; margin: 0; }
+p { margin: 0; }
+ul { margin: 3pt 0 0; padding-left: 12pt; }
+.marge ul { list-style: none; padding: 0; margin: 0; }
+.marge li { margin-bottom: 2pt; }
+.discret { color: #4e5a69; }
+dl { margin: 0; } dt { font-weight: 700; display: inline; } dd { display: inline; margin: 0; }
+dl div { margin-bottom: 4pt; }
+</style></head><body>
+<header>
+  <h1>{{ site.nom }}</h1>
+  <p class="sous">{{ site.titre }}</p>
+  <p class="contact">{{ site.email }}{% if site.ville %} – {{ site.ville }}{% endif %}{% if site.url_portfolio %} – {{ site.url_portfolio }}{% endif %}</p>
+</header>
+<div class="grille">
+  <div class="principal">
+    <h2>Profil</h2><p>{{ cv.profil }}</p>
+    <h2>Expérience professionnelle</h2>
+    {% for e in cv.experiences %}
+    <div class="item"><p class="date">{{ e.dates }}</p><div><h3>{{ e.poste }}</h3><p>{{ e.lieu }}</p>{% if e.precision %}<p class="discret">{{ e.precision }}</p>{% endif %}
+      {% if e.missions %}<ul>{% for m in e.missions %}<li>{{ m }}</li>{% endfor %}</ul>{% endif %}</div></div>
+    {% endfor %}
+    <h2>Formation</h2>
+    {% for f in cv.formations %}
+    <div class="item"><p class="date">{{ f.dates }}</p><div><h3>{{ f.diplome }}</h3><p>{{ f.lieu }}</p></div></div>
+    {% endfor %}
+    <h2>Compétences</h2>
+    <dl>{% for c in cv.competences %}<div><dt>{{ c.domaine }} :</dt> <dd>{{ c.texte }}</dd></div>{% endfor %}</dl>
+  </div>
+  <div class="marge">
+    {% if cv.langues %}<h2>Langues</h2><ul>{% for l in cv.langues %}<li>{{ l }}</li>{% endfor %}</ul>{% endif %}
+    {% if cv.savoir_etre %}<h2>Savoir-être</h2><ul>{% for l in cv.savoir_etre %}<li>{{ l }}</li>{% endfor %}</ul>{% endif %}
+    {% if cv.centres_interet %}<h2>Centres d'intérêt</h2><ul>{% for l in cv.centres_interet %}<li>{{ l }}</li>{% endfor %}</ul>{% endif %}
+  </div>
+</div>
+</body></html>

@@ -1,0 +1,17 @@
+# Informations générales du site. Modifie le texte après les deux-points.
+nom: Dorian Da Col
+titre: Étudiant en BTS SIO, option SLAM
+option: SLAM (Solutions logicielles et applications métiers)
+session: 2027
+centre: Lycée Marie Curie, Tarbes
+numero_candidat: ""          # à remplir quand tu l'auras reçu
+
+# Adresse publique du site, à remplir une fois le site en ligne.
+# Exemple : https://ton-pseudo.github.io/portfolio/
+url_portfolio: ""
+
+# Contact. Laisse vide ("") ce que tu ne veux pas afficher.
+email: dorian.dacol@gmail.com
+ville: Tarbes et ses environs (Hautes-Pyrénées)
+github: ""                   # exemple : https://github.com/ton-pseudo
+linkedin: ""                 # exemple : https://www.linkedin.com/in/ton-profil

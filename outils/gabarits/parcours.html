@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block titre %}Parcours – {{ site.nom }}{% endblock %}
+{% block contenu %}
+<div class="cadre page">
+  <header class="page-entete">
+    <h1>{{ page.titre }}</h1>
+    {% if page.introduction %}<p class="chapeau">{{ page.introduction }}</p>{% endif %}
+  </header>
+  <div class="deux-colonnes">
+    <section aria-labelledby="t-formation">
+      <h2 id="t-formation">Formation</h2>
+      <ol class="frise">
+        {% for f in cv.formations %}
+        <li><span class="frise-date">{{ f.dates }}</span><strong>{{ f.diplome }}</strong><span>{{ f.lieu }}</span></li>
+        {% endfor %}
+      </ol>
+    </section>
+    <section aria-labelledby="t-experience">
+      <h2 id="t-experience">Expérience professionnelle</h2>
+      <ol class="frise">
+        {% for e in cv.experiences %}
+        <li><span class="frise-date">{{ e.dates }}</span><strong>{{ e.poste }}</strong><span>{{ e.lieu }}</span>{% if e.precision %}<span class="discret">{{ e.precision }}</span>{% endif %}</li>
+        {% endfor %}
+      </ol>
+    </section>
+  </div>
+  <div class="prose">{{ page.html | safe }}</div>
+</div>
+{% endblock %}

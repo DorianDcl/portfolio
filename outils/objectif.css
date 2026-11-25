@@ -1,0 +1,12 @@
+/* Styles réservés à l'aperçu FICTIF (objectif/_apercu). Jamais copiés dans le vrai site. */
+.bandeau-objectif { position: sticky; top: 0; z-index: 50; background: #b42318; color: #fff; padding: 0.55rem 1rem; text-align: center; font-size: 0.92rem; line-height: 1.5; }
+.bandeau-objectif strong { font-size: 1.05rem; letter-spacing: 0.02em; display: block; }
+body { background-image: repeating-linear-gradient(135deg, transparent 0 46px, rgba(180, 35, 24, 0.035) 46px 48px); }
+.etat { display: inline-block; font-size: 0.74rem; font-weight: 700; padding: 0.05rem 0.45rem; border-radius: 3px; vertical-align: 0.08em; white-space: nowrap; }
+.etat.etat-fait { background: #d9f2e0; color: #0d5a26; border: 1px solid #0d5a26; }
+.etat.etat-afaire { background: #ffe6c7; color: #8a3d00; border: 1px solid #8a3d00; }
+li.etat-fait, p.etat-fait, dd.etat-fait, h3.etat-fait { border-left: 4px solid #1a7f37; padding-left: 0.6rem; }
+li.etat-afaire, p.etat-afaire, dd.etat-afaire, h3.etat-afaire { border-left: 4px solid #d9730d; padding-left: 0.6rem; background: #fff8ee; }
+td.etat-fait { box-shadow: inset 4px 0 0 #1a7f37; }
+td.etat-afaire { box-shadow: inset 4px 0 0 #d9730d; background: #fff8ee; }
+.prose ul > li.etat-fait, .prose ul > li.etat-afaire, .prose ol > li.etat-fait, .prose ol > li.etat-afaire { list-style-position: outside; }

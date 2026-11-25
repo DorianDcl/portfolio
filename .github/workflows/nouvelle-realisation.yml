@@ -1,0 +1,41 @@
+# Crée le dossier d'une nouvelle réalisation à partir du modèle, sans rien installer.
+# Onglet « Actions » > « Créer une réalisation » > « Run workflow ».
+name: Créer une réalisation
+
+on:
+  workflow_dispatch:
+    inputs:
+      titre:
+        description: "Titre de la réalisation"
+        required: true
+        type: string
+      periode:
+        description: "Période"
+        required: true
+        type: choice
+        default: formation
+        options: [formation, stage-1, stage-2]
+
+permissions:
+  contents: write
+
+jobs:
+  creer:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Copier le modèle
+        env:
+          TITRE: ${{ inputs.titre }}
+          PERIODE: ${{ inputs.periode }}
+        run: python outils/nouvelle_realisation.py "$TITRE" "$PERIODE" | tee -a "$GITHUB_STEP_SUMMARY"
+      - name: Enregistrer le nouveau dossier
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add realisations
+          git commit -m "Nouvelle réalisation (brouillon) : ${{ github.run_number }}"
+          git push

@@ -1,0 +1,5 @@
+Dépose ici tes captures d'écran (PNG ou JPG).
+- Elles sont redimensionnées et allégées automatiquement.
+- Elles s'affichent dans l'ordre alphabétique : commence les noms par 01-, 02-, 03-…
+- Le nom du fichier sert de légende : « 02-page-de-connexion.png » donne « Page de connexion ».
+- La première image sert d'illustration dans la liste des réalisations.

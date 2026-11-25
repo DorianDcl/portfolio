@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% from "_macros.html" import documents %}
+{% block titre %}{{ v.titre }} – Veille – {{ site.nom }}{% endblock %}
+{% block description %}{{ v.resume or v.titre }}{% endblock %}
+{% block contenu %}
+<article class="cadre page">
+  <p class="fil"><a href="{{ racine }}veille/">Veille technologique</a></p>
+  <header class="page-entete">
+    <p class="rea-meta">{% if v.theme %}<span>{{ v.theme }}</span> {% endif %}<span>Mise à jour le {{ v.date }}</span></p>
+    <h1>{{ v.titre }}</h1>
+    {% if v.resume %}<p class="chapeau">{{ v.resume }}</p>{% endif %}
+  </header>
+  <div class="fiche">
+    <div class="prose">{{ v.html | safe }}</div>
+    <aside class="fiche-marge" aria-label="Fiche de la veille">
+      <dl>
+        {% if v.outils %}<dt>Outils de veille</dt><dd>{{ v.outils | join(', ') }}</dd>{% endif %}
+        {% if v.documents %}<dt>Documents</dt><dd>{{ documents(v.documents, racine) }}</dd>{% endif %}
+      </dl>
+    </aside>
+  </div>
+  {% if v.sources %}
+  <section aria-labelledby="t-sources">
+    <h2 id="t-sources">Journal de veille</h2>
+    <ol class="sources">
+      {% for s in v.sources %}
+      <li>
+        {% if s.url %}<a href="{{ s.url }}" rel="noopener">{{ s.titre }}</a>{% else %}{{ s.titre }}{% endif %}
+        <span class="discret">{{ s.editeur }}{% if s.editeur and s.date %}, {% endif %}{{ s.date }}</span>
+        {% if s.note %}<p>{{ s.note }}</p>{% endif %}
+        {% if s.impact %}<p><strong>Pour un développeur :</strong> {{ s.impact }}</p>{% endif %}
+      </li>
+      {% endfor %}
+    </ol>
+  </section>
+  {% endif %}
+  <p class="retour"><a href="{{ racine }}veille/">Retour à la veille</a></p>
+</article>
+{% endblock %}

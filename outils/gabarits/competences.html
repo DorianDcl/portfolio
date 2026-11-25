@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% block titre %}Tableau des compétences – {{ site.nom }}{% endblock %}
+{% block contenu %}
+<div class="cadre page">
+  <header class="page-entete page-entete-actions">
+    <div>
+      <h1>Tableau des compétences</h1>
+      <p class="chapeau">Ce tableau croise mes réalisations avec les six compétences du bloc 1, « Support et mise à disposition de services informatiques ». Il est produit automatiquement à partir des fiches de réalisation : il correspond donc toujours au contenu du portfolio.</p>
+    </div>
+    {% if tableau_xlsx %}<a class="bouton" href="{{ racine }}{{ tableau_xlsx }}" download>Télécharger le tableau (.xlsx)</a>{% endif %}
+  </header>
+
+  <div class="tableau-defilant" role="region" aria-label="Tableau de synthèse des réalisations" tabindex="0">
+    <table class="synthese">
+      <thead>
+        <tr>
+          <th scope="col" class="col-rea">Réalisation</th>
+          {% for c in competences %}<th scope="col"><a href="#{{ c.id }}">{{ c.intitule }}</a></th>{% endfor %}
+        </tr>
+      </thead>
+      {% for g in groupes %}
+      <tbody>
+        <tr class="groupe"><th scope="rowgroup" colspan="{{ competences | length + 1 }}">{{ g.nom }}</th></tr>
+        {% for r in g.realisations %}
+        <tr>
+          <th scope="row" class="col-rea"><a href="{{ racine }}{{ r.url }}">{{ r.titre }}</a><span class="discret">{{ r.dates | capitalize }}</span></th>
+          {% for c in competences %}
+          <td>{% if c.id in r.competences %}<span class="coche" aria-hidden="true"></span><span class="invisible">Oui</span>{% else %}<span class="invisible">Non</span>{% endif %}</td>
+          {% endfor %}
+        </tr>
+        {% else %}
+        <tr><td class="vide" colspan="{{ competences | length + 1 }}">Aucune réalisation pour le moment.</td></tr>
+        {% endfor %}
+      </tbody>
+      {% endfor %}
+      <tfoot>
+        <tr>
+          <th scope="row" class="col-rea">Nombre de réalisations</th>
+          {% for c in competences %}<td>{{ c.realisations | length }}</td>{% endfor %}
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+
+  <section class="details-competences" aria-labelledby="t-detail">
+    <h2 id="t-detail">Le détail des compétences</h2>
+    {% for c in competences %}
+    <div class="competence" id="{{ c.id }}">
+      <h3>{{ c.intitule }}</h3>
+      <div class="competence-grille">
+        <ul class="sous-competences">{% for d in c.details %}<li>{{ d }}</li>{% endfor %}</ul>
+        <div>
+          {% if c.realisations %}
+          <p class="discret">Mobilisée dans :</p>
+          <ul>{% for r in c.realisations %}<li><a href="{{ racine }}{{ r.url }}">{{ r.titre }}</a></li>{% endfor %}</ul>
+          {% else %}
+          <p class="discret">Pas encore de réalisation : elle est prévue dans la suite de ma formation.</p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </section>
+</div>
+{% endblock %}

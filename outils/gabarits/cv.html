@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block titre %}CV – {{ site.nom }}{% endblock %}
+{% block contenu %}
+<div class="cadre page">
+  <header class="page-entete page-entete-actions">
+    <div>
+      <h1>Curriculum vitæ</h1>
+      <p class="chapeau">{{ cv.profil }}</p>
+    </div>
+    {% if cv_pdf %}<a class="bouton" href="{{ racine }}{{ cv_pdf }}" download>Télécharger le CV (PDF)</a>{% endif %}
+  </header>
+
+  <div class="cv">
+    <div class="cv-principal">
+      <section aria-labelledby="cv-exp">
+        <h2 id="cv-exp">Expérience professionnelle</h2>
+        {% for e in cv.experiences %}
+        <div class="cv-item">
+          <p class="cv-date">{{ e.dates }}</p>
+          <div>
+            <h3>{{ e.poste }}</h3>
+            <p>{{ e.lieu }}{% if e.precision %}<br><span class="discret">{{ e.precision }}</span>{% endif %}</p>
+            {% if e.missions %}<ul>{% for m in e.missions %}<li>{{ m }}</li>{% endfor %}</ul>{% endif %}
+          </div>
+        </div>
+        {% endfor %}
+      </section>
+      <section aria-labelledby="cv-for">
+        <h2 id="cv-for">Formation</h2>
+        {% for f in cv.formations %}
+        <div class="cv-item">
+          <p class="cv-date">{{ f.dates }}</p>
+          <div><h3>{{ f.diplome }}</h3><p>{{ f.lieu }}</p></div>
+        </div>
+        {% endfor %}
+      </section>
+      <section aria-labelledby="cv-comp">
+        <h2 id="cv-comp">Compétences</h2>
+        <dl class="cv-competences">
+          {% for c in cv.competences %}<div><dt>{{ c.domaine }}</dt><dd>{{ c.texte }}</dd></div>{% endfor %}
+        </dl>
+      </section>
+    </div>
+    <aside class="cv-marge" aria-label="Informations complémentaires">
+      {% if cv.langues %}<h2>Langues</h2><ul>{% for l in cv.langues %}<li>{{ l }}</li>{% endfor %}</ul>{% endif %}
+      {% if cv.savoir_etre %}<h2>Savoir-être</h2><ul>{% for l in cv.savoir_etre %}<li>{{ l }}</li>{% endfor %}</ul>{% endif %}
+      {% if cv.centres_interet %}<h2>Centres d'intérêt</h2><ul>{% for l in cv.centres_interet %}<li>{{ l }}</li>{% endfor %}</ul>{% endif %}
+      <h2>Contact</h2>
+      <p><a href="{{ racine }}contact/">Page de contact</a></p>
+    </aside>
+  </div>
+</div>
+{% endblock %}

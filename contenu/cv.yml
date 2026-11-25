@@ -1,0 +1,52 @@
+# Ton CV. La page « CV » du site ET le PDF téléchargeable sont fabriqués à partir de ce fichier.
+# (Si tu préfères ton propre PDF, dépose-le ici sous le nom contenu/cv.pdf : il sera prioritaire.)
+# Ton numéro de téléphone n'apparaît volontairement pas : le site est public.
+
+profil: >
+  Étudiant en 2e année de BTS SIO, option SLAM, je maîtrise les bases de la
+  programmation Java et du développement web. Je souhaite réaliser mon stage de
+  2e année à l'étranger dans le cadre d'Erasmus+, afin de mettre mes compétences
+  en pratique dans un environnement international et de progresser en anglais.
+
+experiences:
+  - dates: "2026"
+    poste: Stagiaire en communication digitale
+    lieu: InBelli Consulting, espace de coworking Big Crescendo, Tarbes
+    precision: Stage de 1re année de BTS SIO
+    missions:
+      - Participation au lancement numérique d'une entreprise
+      - Création de vidéos, tournage et montage sous CapCut
+      - Configuration du site web sur le CMS Odoo
+      - Travail en autonomie, en partie en télétravail
+
+formations:
+  - dates: "2025 – 2027"
+    diplome: BTS SIO – Services informatiques aux organisations, option SLAM (en cours)
+    lieu: Lycée Marie Curie, Tarbes
+  - dates: "2025"
+    diplome: Baccalauréat général, spécialités NSI et Mathématiques
+    lieu: Lycée Marie Curie, Tarbes
+  - dates: "2022"
+    diplome: Diplôme national du brevet
+    lieu: Collège Victor Hugo, Tarbes
+
+competences:
+  - domaine: Développement
+    texte: algorithmique et programmation Java (variables, conditions, boucles, tableaux, fonctions).
+  - domaine: Web
+    texte: création de pages web statiques en HTML5 et CSS3, utilisation des CMS WordPress et Odoo.
+  - domaine: Bases de données
+    texte: conception et manipulation de bases de données en SQL (Access, SQL Server).
+  - domaine: Systèmes et réseaux
+    texte: installation et configuration de Windows et Linux (Debian), notions de virtualisation et d'architecture réseau.
+  - domaine: Cybersécurité
+    texte: sensibilisation à la disponibilité, l'intégrité et la confidentialité des données.
+  - domaine: Multimédia
+    texte: tournage et montage vidéo (CapCut).
+
+langues:
+  - "Anglais : niveau scolaire"
+
+savoir_etre: [Autonomie, Adaptabilité, Curiosité, Aisance en télétravail]
+
+centres_interet: [Sport, Lecture, Cinéma, Nouvelles technologies]

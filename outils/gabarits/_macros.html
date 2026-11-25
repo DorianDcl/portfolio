@@ -1,0 +1,27 @@
+{% macro etiquette_periode(r) %}<span class="periode periode-{{ r.periode }}">{{ r.periode_court }}</span>{% endmacro %}
+
+{% macro ligne_realisation(r, racine, par_id) %}
+<li class="rea" data-competences="{{ r.competences | join(' ') }}" data-periode="{{ r.periode }}" data-technologies="{{ r.technologies | map('slug') | join(' ') }}">
+  <a class="rea-vignette" href="{{ racine }}{{ r.url }}" tabindex="-1" aria-hidden="true">
+    {% if r.images %}
+    <img src="{{ racine }}{{ r.url }}{{ r.images[0].mini }}" alt="" width="{{ r.images[0].mini_largeur }}" height="{{ r.images[0].mini_hauteur }}" loading="lazy">
+    {% else %}
+    <span class="rea-sans-image">{{ r.titre[:1] }}</span>
+    {% endif %}
+  </a>
+  <div class="rea-texte">
+    <p class="rea-meta">{{ etiquette_periode(r) }} <span>{{ r.dates }}</span>{% if r.e6 %} <span class="e6">Support de l'épreuve E6</span>{% endif %}</p>
+    <h3><a href="{{ racine }}{{ r.url }}">{{ r.titre }}</a></h3>
+    {% if r.resume %}<p>{{ r.resume }}</p>{% endif %}
+    {% if r.technologies %}<p class="rea-techno">{{ r.technologies | join(', ') }}</p>{% endif %}
+  </div>
+</li>
+{% endmacro %}
+
+{% macro documents(liste, racine_doc) %}
+<ul class="documents">
+  {% for d in liste %}
+  <li><a href="{{ racine_doc }}{{ d.url }}" download>{{ d.nom }}</a> <span class="discret">({{ d.type }}, {{ d.taille }})</span></li>
+  {% endfor %}
+</ul>
+{% endmacro %}

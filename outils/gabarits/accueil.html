@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% from "_macros.html" import ligne_realisation %}
+{% block contenu %}
+<section class="hero">
+  <div class="cadre hero-grille">
+    <div>
+      <h1 class="hero-nom">{{ site.nom }}</h1>
+      <p class="hero-titre">{{ site.titre }}</p>
+      {% if page.accroche %}<p class="hero-accroche">{{ page.accroche }}</p>{% endif %}
+      <div class="prose">{{ page.html | safe }}</div>
+      <p class="actions">
+        <a class="bouton" href="{{ racine }}realisations/">Voir mes réalisations</a>
+        {% if cv_pdf %}<a class="bouton bouton-clair" href="{{ racine }}{{ cv_pdf }}" download>Télécharger mon CV (PDF)</a>{% endif %}
+      </p>
+    </div>
+    <aside class="couverture" aria-labelledby="titre-couverture">
+      <h2 id="titre-couverture">Compétences du bloc 1 travaillées</h2>
+      <p class="discret">Un carré plein par réalisation qui mobilise la compétence.</p>
+      <ul>
+        {% for c in competences %}
+        <li>
+          <span class="couverture-nom">{{ c.intitule }}</span>
+          <span class="couverture-carres" aria-hidden="true">{% for r in c.realisations %}<i class="plein"></i>{% endfor %}{% if not c.realisations %}<i></i>{% endif %}</span>
+          <span class="couverture-nombre">{% if c.realisations %}{{ c.realisations | length }} réalisation{{ 's' if c.realisations | length > 1 }}{% else %}à venir{% endif %}</span>
+        </li>
+        {% endfor %}
+      </ul>
+      <p><a href="{{ racine }}competences/">Voir le tableau des compétences</a></p>
+    </aside>
+  </div>
+</section>
+
+<section class="bloc">
+  <div class="cadre">
+    <div class="bloc-entete">
+      <h2>Dernières réalisations</h2>
+      <a href="{{ racine }}realisations/">Toutes les réalisations ({{ realisations | length }})</a>
+    </div>
+    <ul class="liste-rea">
+      {% for r in realisations[:3] %}{{ ligne_realisation(r, racine, par_id) }}{% endfor %}
+    </ul>
+  </div>
+</section>
+
+{% if veilles %}
+<section class="bloc bloc-brume">
+  <div class="cadre">
+    <div class="bloc-entete">
+      <h2>Veille technologique</h2>
+      <a href="{{ racine }}veille/">Toute la veille</a>
+    </div>
+    {% set v = veilles[0] %}
+    <article class="veille-une">
+      <p class="rea-meta"><span>{{ v.theme }}</span> <span>Mise à jour le {{ v.date }}</span></p>
+      <h3><a href="{{ racine }}{{ v.url }}">{{ v.titre }}</a></h3>
+      <p>{{ v.resume }}</p>
+    </article>
+  </div>
+</section>
+{% endif %}
+{% endblock %}

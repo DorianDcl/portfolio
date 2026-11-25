@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block titre %}Contact – {{ site.nom }}{% endblock %}
+{% block contenu %}
+<div class="cadre page">
+  <header class="page-entete">
+    <h1>{{ page.titre }}</h1>
+    {% if page.introduction %}<p class="chapeau">{{ page.introduction }}</p>{% endif %}
+  </header>
+  <dl class="contact">
+    {% if site.email %}
+    {% set morceaux = site.email.split('@') %}
+    <div><dt>Courriel</dt>
+      <dd><a class="courriel" href="#" data-u="{{ morceaux[0] }}" data-d="{{ morceaux[1] }}">{{ morceaux[0] }} (arobase) {{ morceaux[1] }}</a></dd></div>
+    {% endif %}
+    {% if site.linkedin %}<div><dt>LinkedIn</dt><dd><a href="{{ site.linkedin }}" rel="noopener me">Mon profil LinkedIn</a></dd></div>{% endif %}
+    {% if site.github %}<div><dt>GitHub</dt><dd><a href="{{ site.github }}" rel="noopener me">Mes dépôts de code</a></dd></div>{% endif %}
+    {% if site.ville %}<div><dt>Secteur</dt><dd>{{ site.ville }}</dd></div>{% endif %}
+  </dl>
+  <div class="prose">{{ page.html | safe }}</div>
+</div>
+{% endblock %}

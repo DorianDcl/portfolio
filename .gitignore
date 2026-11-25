@@ -1,0 +1,8 @@
+_site/
+__pycache__/
+*.pyc
+.DS_Store
+Thumbs.db
+
+# Version objectif (fictive) : ne doit JAMAIS être envoyée sur GitHub.
+objectif/

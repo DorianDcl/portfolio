@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block titre %}{{ page.titre }} – {{ site.nom }}{% endblock %}
+{% block contenu %}
+<div class="cadre page">
+  <header class="page-entete">
+    <h1>{{ page.titre }}</h1>
+    {% if page.introduction %}<p class="chapeau">{{ page.introduction }}</p>{% endif %}
+  </header>
+  <div class="prose">{{ page.html | safe }}</div>
+</div>
+{% endblock %}

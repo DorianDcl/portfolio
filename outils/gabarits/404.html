@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block titre %}Page introuvable – {{ site.nom }}{% endblock %}
+{% block contenu %}
+<div class="cadre page">
+  <header class="page-entete">
+    <h1>Cette page n'existe pas</h1>
+    <p class="chapeau">L'adresse a peut-être changé. Le menu en haut de page mène à toutes les rubriques du portfolio.</p>
+  </header>
+  <p><a class="bouton" href="{{ racine }}">Revenir à l'accueil</a></p>
+</div>
+{% endblock %}

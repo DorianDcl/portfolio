@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% from "_macros.html" import ligne_realisation %}
+{% block titre %}Réalisations – {{ site.nom }}{% endblock %}
+{% block contenu %}
+<div class="cadre page">
+  <header class="page-entete">
+    <h1>Réalisations professionnelles</h1>
+    <p class="chapeau">Les projets menés en cours de formation et en stage. Chaque page décrit le contexte, la démarche, le résultat et les compétences mobilisées.</p>
+  </header>
+
+  <form class="filtres" id="filtres" hidden>
+    <label>Compétence
+      <select name="competence">
+        <option value="">Toutes</option>
+        {% for c in competences %}<option value="{{ c.id }}">{{ c.intitule }}</option>{% endfor %}
+      </select>
+    </label>
+    <label>Période
+      <select name="periode">
+        <option value="">Toutes</option>
+        {% for g in groupes %}<option value="{{ g.id }}">{{ g.court }}</option>{% endfor %}
+      </select>
+    </label>
+    <label>Technologie
+      <select name="technologie">
+        <option value="">Toutes</option>
+        {% for t in technologies %}<option value="{{ t | slug }}">{{ t }}</option>{% endfor %}
+      </select>
+    </label>
+    <button type="reset" class="bouton bouton-clair">Tout afficher</button>
+  </form>
+  <p class="compteur" id="compteur" aria-live="polite">{{ realisations | length }} réalisation{{ 's' if realisations | length > 1 }}</p>
+
+  <ul class="liste-rea" id="liste-rea">
+    {% for r in realisations %}{{ ligne_realisation(r, racine, par_id) }}{% endfor %}
+  </ul>
+  <p id="aucune" class="vide" hidden>Aucune réalisation ne correspond à ces filtres. Choisis « Tout afficher » pour revenir à la liste complète.</p>
+</div>
+{% endblock %}
